@@ -10,8 +10,7 @@ A simple URL shortening service built with Python. This service allows users to 
 ## Technologies Used
 - Python
 - Flask
-- SQLite (or any other database)
-- [Any other technologies you've used]
+- SQLite
 
 ## Installation
 
@@ -23,14 +22,14 @@ A simple URL shortening service built with Python. This service allows users to 
 
    If you’re using a virtual environment, create and activate it:
 
-   python -m venv venv
-   .\venv\Scripts\activate  # On Windows
-   source venv/bin/activate  # On macOS/Linux
+    - python -m venv venv
+    - .\venv\Scripts\activate  # On Windows
+    - source venv/bin/activate  # On macOS/Linux
 
    Then install the requirements:
 
-   pip install -r requirements.txt
-
+    - pip install -r requirements.txt
+ 
 3. Run the application:
 
    python app.py
@@ -41,6 +40,3 @@ A simple URL shortening service built with Python. This service allows users to 
 
 Feel free to fork this project and submit pull requests. For major changes, please open an issue first to discuss what you would like to change.
 
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
