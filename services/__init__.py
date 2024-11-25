@@ -1,1 +1,0 @@
-from .url_shortener_routes import url_shortener_blueprint
