@@ -23,8 +23,8 @@ A simple URL shortening service built with Python. This service allows users to 
    If you’re using a virtual environment, create and activate it:
 
     - python -m venv venv
-    - .\venv\Scripts\activate  # On Windows
-    - source venv/bin/activate  # On macOS/Linux
+    - .\venv\Scripts\activate   (On Windows)
+    - source venv/bin/activate   (On macOS/Linux)
 
    Then install the requirements:
 
