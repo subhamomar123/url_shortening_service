@@ -34,12 +34,10 @@ A simple URL shortening service built with Python. This service allows users to 
 
    python app.py
 
-4. Open your browser and go to http://localhost:5000 to use the URL shortening service.
-
-5. Run Tests:
+4. Run Tests:
 
    pytest
-   
+
 ## Contributing
 
 Feel free to fork this project and submit pull requests. For major changes, please open an issue first to discuss what you would like to change.
