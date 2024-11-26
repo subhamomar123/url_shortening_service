@@ -1,6 +1,5 @@
 from flask import Flask
-from db import db
-from services.url_shortener_routes import url_shortener_blueprint
+from flasgger import Swagger
 
 
 class URLShortenerApp:
@@ -12,9 +11,14 @@ class URLShortenerApp:
             else {
                 "SQLALCHEMY_DATABASE_URI": "sqlite:///url_shortener.db",
                 "SQLALCHEMY_TRACK_MODIFICATIONS": False,
+                "SWAGGER": {
+                    "title": "URL Shortener Service",
+                    "uiversion": 3,
+                },
             }
         )
         self._configure_app()
+        self.swagger = Swagger(self.app)  # Initialize Swagger
 
     def _configure_app(self):
         """Set up app configurations"""
@@ -22,10 +26,14 @@ class URLShortenerApp:
 
     def _register_blueprints(self):
         """Register blueprints for routes"""
-        self.app.register_blueprint(url_shortener_blueprint)
+        from services.url_shortener_routes import url_shortener_blueprint
+
+        self.app.register_blueprint(url_shortener_blueprint, url_prefix="/api")
 
     def _initialize_db(self):
         """Initialize database with app context"""
+        from db import db
+
         db.init_app(self.app)
         with self.app.app_context():
             db.create_all()

@@ -8,6 +8,34 @@ class URLShortenerAPI:
         self.url_shortener_service = URLShortenerService()
 
     def shorten(self, data):
+        """
+        Shorten a long URL
+        ---
+        tags:
+          - URL Shortener
+        parameters:
+          - name: data
+            in: body
+            required: true
+            schema:
+              type: object
+              properties:
+                long_url:
+                  type: string
+                  description: The URL to be shortened
+        responses:
+          201:
+            description: Shortened URL successfully created
+            schema:
+              type: object
+              properties:
+                short_url:
+                  type: string
+          400:
+            description: Invalid input
+          500:
+            description: Internal server error
+        """
         try:
             if not data:
                 return {"error": "No data provided"}, 400
@@ -34,6 +62,30 @@ class URLShortenerAPI:
             return {"error": str(e)}, 500
 
     def redirect_to_long(self, short_url):
+        """
+        Redirect to the original URL
+        ---
+        tags:
+          - URL Shortener
+        parameters:
+          - name: short_url
+            in: path
+            type: string
+            required: true
+            description: The shortened URL
+        responses:
+          200:
+            description: Original URL successfully retrieved
+            schema:
+              type: object
+              properties:
+                original_url:
+                  type: string
+          404:
+            description: Shortened URL not found
+          500:
+            description: Internal server error
+        """
         try:
             long_url = self.url_shortener_service.get_original_url(short_url)
 
@@ -48,6 +100,50 @@ class URLShortenerAPI:
             return {"error": str(e)}, 500
 
     def get_paginated_stats_route(self, page, page_size):
+        """
+        Get paginated statistics of shortened URLs
+        ---
+        tags:
+          - URL Statistics
+        parameters:
+          - name: page
+            in: query
+            type: integer
+            required: true
+            description: The page number
+          - name: page_size
+            in: query
+            type: integer
+            required: true
+            description: The number of records per page
+        responses:
+          200:
+            description: Paginated URL statistics
+            schema:
+              type: object
+              properties:
+                total_records:
+                  type: integer
+                total_pages:
+                  type: integer
+                current_page:
+                  type: integer
+                records:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      short_url:
+                        type: string
+                      original_url:
+                        type: string
+                      access_count:
+                        type: integer
+          404:
+            description: Page not found
+          500:
+            description: Internal server error
+        """
         try:
             total_records = self.url_shortener_service.get_total_record_count()
             if total_records == 0:
